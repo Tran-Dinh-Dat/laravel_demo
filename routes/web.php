@@ -102,3 +102,54 @@ Route::get('crudorm/where', function() {
         echo $value->id .' '.$value->name .'</br>';
     }
 });
+// insert with eloquent
+Route::get('crudorm/insert', function() {
+    // create post valiable
+    $post = new Rhppost;
+    // set data
+    $post->name = '123 insert';
+    $post->age = 123;
+    $post->role = 1;
+    $post->email = 'insert@gmail.com';
+    $post->url = 'insert.com.vn';
+    //save
+    $post->save();
+    return 'Đã thực thi';
+
+});
+//replace  data
+Route::get('crudorm/replace', function() {
+    // create post valiable
+    $post = Rhppost::find(3);
+    // set data
+    $post->name = '123 insert';
+    $post->age = 123;
+    $post->role = 1;
+    $post->email = 'insert@gmail.com';
+    $post->url = 'insert.com.vn';
+    //save
+    $post->save();
+    return 'Đã thực thi';
+
+});
+//update date with eloquent
+Route::get('crudorm/update', function() {
+    Rhppost::where('id', '=', 7)->update([
+        'name' => 'Dat',
+        'age'   => 21,
+        'email' => 'dat@gmail.com',
+        'role' => 1,
+        'url' => 'fb.com'
+    ]);
+    return 'Đã thực thi';
+});
+// Delete with eloquent
+Route::get('crudorm/delete', function() {
+    Rhppost::find(7)->delete();
+    return 'Đã thực thi';
+});
+// Deleting An Existing Model By Key destroy
+Route::get('crudorm/destroy', function() {
+    Rhppost::destroy([7,5]);
+    return 'Đã thực thi';
+});
